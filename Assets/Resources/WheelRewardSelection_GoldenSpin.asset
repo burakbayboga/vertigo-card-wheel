@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cd49602df7943044862bf5fced90a3a, type: 3}
+  m_Name: WheelRewardSelection_GoldenSpin
+  m_EditorClassIdentifier: 
+  Rewards:
+  - RewardType: 0
+    RewardAmount: 15000
+  - RewardType: 0
+    RewardAmount: 9000
+  - RewardType: 7
+    RewardAmount: 2
+  - RewardType: 14
+    RewardAmount: 30
+  - RewardType: 8
+    RewardAmount: 500
+  - RewardType: 27
+    RewardAmount: 5
+  - RewardType: 10
+    RewardAmount: 25
+  - RewardType: 4
+    RewardAmount: 5

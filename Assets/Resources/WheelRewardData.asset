@@ -1,0 +1,81 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 805c95d572a8f06409bece58c42d46ff, type: 3}
+  m_Name: WheelRewardData
+  m_EditorClassIdentifier: 
+  WheelRewardDataItems:
+  - Type: 0
+    Sprite: {fileID: 21300000, guid: 8fbb52814295f3c49ade0f8679f60be1, type: 3}
+  - Type: 1
+    Sprite: {fileID: 21300000, guid: 67ecf2efe0b469d4f833117bab033eae, type: 3}
+  - Type: 2
+    Sprite: {fileID: 21300000, guid: 1a62368cb2b359b4ab5134abef664c46, type: 3}
+  - Type: 3
+    Sprite: {fileID: 21300000, guid: fe93e4cf8fe33c04dbb95d8e02e28809, type: 3}
+  - Type: 4
+    Sprite: {fileID: 21300000, guid: 694a1f3abb7e8b049895c0e0a21f6cb9, type: 3}
+  - Type: 5
+    Sprite: {fileID: 21300000, guid: 6af9aa3d6778eb84391ea3dc3f1c098a, type: 3}
+  - Type: 6
+    Sprite: {fileID: 21300000, guid: d9fec6549c77a3047bdf2cf991ee3fe1, type: 3}
+  - Type: 7
+    Sprite: {fileID: 21300000, guid: 3a788a07edf078a4d9c301033a50a8fd, type: 3}
+  - Type: 8
+    Sprite: {fileID: 21300000, guid: ef41d3f27acd1e24cbd7684c8fc18308, type: 3}
+  - Type: 9
+    Sprite: {fileID: 21300000, guid: eadd594eeeb1e36448435801ae9110d1, type: 3}
+  - Type: 10
+    Sprite: {fileID: 21300000, guid: 08c6ab60310331741a488a219d55a6b9, type: 3}
+  - Type: 11
+    Sprite: {fileID: 21300000, guid: 11484dbb722f81e4ca8e6fd95b1ffd8e, type: 3}
+  - Type: 12
+    Sprite: {fileID: 21300000, guid: 11d576a691a08d84fad843609853c46b, type: 3}
+  - Type: 13
+    Sprite: {fileID: 21300000, guid: f486be4c18a43664a8ae460375c4b1c3, type: 3}
+  - Type: 14
+    Sprite: {fileID: 21300000, guid: 76f545d921b5bb7488cf9257e2c35fe5, type: 3}
+  - Type: 15
+    Sprite: {fileID: 21300000, guid: 6cb9ca61fccd6464393bcb5b4611e4c5, type: 3}
+  - Type: 16
+    Sprite: {fileID: 21300000, guid: c24659676a5235e4bbdb61fc0f368468, type: 3}
+  - Type: 17
+    Sprite: {fileID: 21300000, guid: 93afd2bf49580df48ba637ca3867ec86, type: 3}
+  - Type: 18
+    Sprite: {fileID: 21300000, guid: 728fa2053a54a3d40a3cea62c939d72a, type: 3}
+  - Type: 19
+    Sprite: {fileID: 21300000, guid: 164ccb47c5b28b74884fb9d83ab5ed14, type: 3}
+  - Type: 20
+    Sprite: {fileID: 21300000, guid: b674aae1e1f99934597f2bb2489cc274, type: 3}
+  - Type: 21
+    Sprite: {fileID: 21300000, guid: 6e5095cd92f1c0748abfe0c3f4119786, type: 3}
+  - Type: 22
+    Sprite: {fileID: 21300000, guid: 7192cfd4912e27d438dc9fa6286367f3, type: 3}
+  - Type: 23
+    Sprite: {fileID: 21300000, guid: 29f98c643d893cb44ae099ea52d3e659, type: 3}
+  - Type: 24
+    Sprite: {fileID: 21300000, guid: cb95f12deaca8124ea1092cc175dd27e, type: 3}
+  - Type: 25
+    Sprite: {fileID: 21300000, guid: da5815b3ba928964ba92fdd5db8d9947, type: 3}
+  - Type: 26
+    Sprite: {fileID: 21300000, guid: 405ac02abd9521e4bbb13df00604726a, type: 3}
+  - Type: 27
+    Sprite: {fileID: 21300000, guid: 97f54c60437c55147a112caad678744b, type: 3}
+  - Type: 28
+    Sprite: {fileID: 21300000, guid: 5d1386d9f5f441743b9607c4a1c2008a, type: 3}
+  - Type: 29
+    Sprite: {fileID: 21300000, guid: 3ae11f9f4cdf8d94caa1f371192f5361, type: 3}
+  - Type: 30
+    Sprite: {fileID: 21300000, guid: fca6587ac6af1234a8fc9d7c4c18247f, type: 3}
+  - Type: 31
+    Sprite: {fileID: 21300000, guid: 7155b746164659e4e8152dfedd034c49, type: 3}
+  - Type: 32
+    Sprite: {fileID: 21300000, guid: 94a26f513282fc44b912c47e71618207, type: 3}

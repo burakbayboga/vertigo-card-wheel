@@ -78,36 +78,9 @@ namespace CardWheel
 
             float GetTurnAmountForMovement()
             {
-                var isLastMovementInChain = _chainIndex == chain.Count - 1;
-                if (isLastMovementInChain)
-                {
-                    // finish turning at exact position for reward
-                    foreach (var interval in _rewardAngleIntervals)
-                    {
-                        if (interval.Min < 0f)
-                        {
-                            if (_currentWheelAngle >= interval.Min + 360f && 360f - _currentWheelAngle <= interval.Max)
-                            {
-                                var targetForInterval = _currentWheelAngle > 180f ? 360f + interval.Center : interval.Center;
-                                return targetForInterval - _currentWheelAngle;
-                            }
-                        }
-                        else
-                        {
-                            if (_currentWheelAngle >= interval.Min && _currentWheelAngle <= interval.Max)
-                            {
-                                return interval.Center - _currentWheelAngle;
-                            }
-                        }
-                    }
-                    
-                    Debug.LogError("No valid angle found to center on reward");
-                    return Random.Range(data.MinTurnAmount, data.MaxTurnAmount);
-                }
-                else
-                {
-                    return Random.Range(data.MinTurnAmount, data.MaxTurnAmount);
-                }
+                var turnCount = Random.Range(data.MinTurnCount, data.MaxTurnCount + 1);
+                return turnCount * WheelMovementData.TurnAmountPerReward;
+
             }
         }
 
