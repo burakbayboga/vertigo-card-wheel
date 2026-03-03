@@ -7,11 +7,11 @@ namespace CardWheel
     [CreateAssetMenu(fileName = "WheelRewardSelection_", menuName = "ScriptableObjects/Wheel Reward Selection")]
     public class WheelRewardSelection : ScriptableObject
     {
-        public List<WheelRewardSelectionItem> Rewards;
+        public List<WheelReward> Rewards;
     }
 
     [Serializable]
-    public struct WheelRewardSelectionItem
+    public struct WheelReward
     {
         public RewardType RewardType;
         public int RewardAmount;

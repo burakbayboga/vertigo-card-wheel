@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd4e660ffcabea84ab0730585ac34d4e, type: 3}
   m_Name: WheelMovementData_Main
   m_EditorClassIdentifier: 
-  MinTurnCount: -12
-  MaxTurnCount: -26
+  MinTurnCount: 12
+  MaxTurnCount: 26
   TurnSpeed: 350
   MovementCurve:
     serializedVersion: 2

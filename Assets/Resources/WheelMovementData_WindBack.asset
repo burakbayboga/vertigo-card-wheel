@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WheelMovementData_WindBack
   m_EditorClassIdentifier: 
   MinTurnCount: 0
-  MaxTurnCount: 2
+  MaxTurnCount: -2
   TurnSpeed: 75
   MovementCurve:
     serializedVersion: 2

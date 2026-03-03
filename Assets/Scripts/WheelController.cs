@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -10,29 +11,35 @@ namespace CardWheel
     {
         [SerializeField] private List<WheelMovementData> _movementChain;
         [SerializeField] private Transform _wheelTransform;
+        [SerializeField] private List<WheelRewardContainer> _rewardContainers;
         
         public static event Action OnSpinButtonClicked;
 
         private float _currentWheelAngle = 0f;
         private bool _isSpinning = false;
         private int _chainIndex = 0;
-        private List<AngleIntervalUnit> _rewardAngleIntervals = new();
+        private int _currentRewardIndex = 0;
+        private List<WheelReward> _rewardsReordered;
+        private GameController _gameController;
 
         private const int _rewardCount = 8;
         
         private void Awake()
         {
             OnSpinButtonClicked = null;
-            InitAngleIntervals();
         }
 
-        private void InitAngleIntervals()
+        public void Init(WheelRewardSelection rewardPool, Dictionary<RewardType, Sprite> spriteMap, GameController gameController)
         {
-            var angleDiff = 360f / _rewardCount;
-            var halfRadius = angleDiff / 2f;
+            _gameController = gameController;
+            _rewardsReordered = rewardPool.Rewards.OrderBy(_ => Random.Range(0f, 1f)).ToList();
+            
             for (var i = 0; i < _rewardCount; i++)
             {
-                _rewardAngleIntervals.Add(new AngleIntervalUnit(i * angleDiff, halfRadius));
+                var reward = _rewardsReordered[i];
+                var sprite = spriteMap[reward.RewardType];
+                var amount = reward.RewardAmount;
+                _rewardContainers[i].Init(reward.RewardType, sprite, amount);
             }
         }
 
@@ -53,11 +60,12 @@ namespace CardWheel
                 _currentWheelAngle += 360f;
             }
             var data = chain[_chainIndex];
-            var turnAmount = GetTurnAmountForMovement();
+            var turnAmount = GetTurnAmountForMovement(out var turnCount);
             var targetAngle = _currentWheelAngle + turnAmount;
             var startAngle = _currentWheelAngle;
             var duration = Mathf.Abs(turnAmount / data.TurnSpeed);
             var curve = data.MovementCurve;
+            _currentRewardIndex += turnCount;
             DOVirtual.Float(0f, 1f, duration, t =>
             {
                 _currentWheelAngle = Mathf.Lerp(startAngle, targetAngle, curve.Evaluate(t));
@@ -76,11 +84,10 @@ namespace CardWheel
                 }
             });
 
-            float GetTurnAmountForMovement()
+            float GetTurnAmountForMovement(out int turnCount)
             {
-                var turnCount = Random.Range(data.MinTurnCount, data.MaxTurnCount + 1);
+                turnCount = Random.Range(data.MinTurnCount, data.MaxTurnCount + 1);
                 return turnCount * WheelMovementData.TurnAmountPerReward;
-
             }
         }
 
@@ -88,6 +95,13 @@ namespace CardWheel
         {
             _isSpinning = false;
             _chainIndex = 0;
+            _currentRewardIndex %= _rewardCount;
+            if (_currentRewardIndex < 0)
+            {
+                _currentRewardIndex += _rewardCount;
+            }
+            
+            _gameController.GiveReward(_rewardsReordered[_currentRewardIndex]);
         }
         
         public static void TriggerSpinButtonClicked()
@@ -103,20 +117,6 @@ namespace CardWheel
         private void OnDisable()
         {
             OnSpinButtonClicked -= TurnWheel;
-        }
-    }
-
-    public struct AngleIntervalUnit
-    {
-        public float Min;
-        public float Max;
-        public float Center;
-
-        public AngleIntervalUnit(float center, float halfRadius)
-        {
-            Center = center;
-            Min = Center - halfRadius;
-            Max = Center + halfRadius;
         }
     }
 }
