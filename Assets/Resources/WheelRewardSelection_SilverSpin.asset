@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7cd49602df7943044862bf5fced90a3a, type: 3}
-  m_Name: WheelRewardSelection_StandardSpin
+  m_Name: WheelRewardSelection_SilverSpin
   m_EditorClassIdentifier: 
   Rewards:
   - RewardType: 0
-    RewardAmount: 500
-  - RewardType: 3
-    RewardAmount: 1
-  - RewardType: 12
-    RewardAmount: 5
-  - RewardType: 17
-    RewardAmount: 1
-  - RewardType: 23
-    RewardAmount: 2
-  - RewardType: 8
-    RewardAmount: 5
+    RewardAmount: 1500
   - RewardType: 0
-    RewardAmount: 2800
-  - RewardType: 33
-    RewardAmount: 1
+    RewardAmount: 900
+  - RewardType: 4
+    RewardAmount: 5
+  - RewardType: 9
+    RewardAmount: 10
+  - RewardType: 8
+    RewardAmount: 500
+  - RewardType: 25
+    RewardAmount: 5
+  - RewardType: 12
+    RewardAmount: 35
+  - RewardType: 4
+    RewardAmount: 8

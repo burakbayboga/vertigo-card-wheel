@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 namespace CardWheel
@@ -12,6 +13,10 @@ namespace CardWheel
         [SerializeField] private List<WheelMovementData> _movementChain;
         [SerializeField] private Transform _wheelTransform;
         [SerializeField] private List<WheelRewardContainer> _rewardContainers;
+        [SerializeField] private Image _gunWheelImage;
+        [SerializeField] private List<Sprite> _wheelTypeSprites;
+        [SerializeField] private Image _pinImage;
+        [SerializeField] private List<Sprite> _pinSprites;
         
         private float _currentWheelAngle = 0f;
         private bool _isSpinning = false;
@@ -19,21 +24,30 @@ namespace CardWheel
         private int _currentRewardIndex = 0;
         private List<WheelReward> _rewardsReordered;
         private GameController _gameController;
+        private Dictionary<RewardType, Sprite> _spriteMap;
 
         private const int _rewardCount = 8;
 
-        public void Init(WheelRewardSelection rewardPool, Dictionary<RewardType, Sprite> spriteMap, GameController gameController)
+        public void Init(Dictionary<RewardType, Sprite> spriteMap, GameController gameController)
         {
             _gameController = gameController;
+            _spriteMap = spriteMap;
+        }
+
+        public void PrepareForSpin(WheelRewardSelection rewardPool, WheelType wheelType)
+        {
             _rewardsReordered = rewardPool.Rewards.OrderBy(_ => Random.Range(0f, 1f)).ToList();
             
             for (var i = 0; i < _rewardCount; i++)
             {
                 var reward = _rewardsReordered[i];
-                var sprite = spriteMap[reward.RewardType];
+                var sprite = _spriteMap[reward.RewardType];
                 var amount = reward.RewardAmount;
-                _rewardContainers[i].Init(reward.RewardType, sprite, amount);
+                _rewardContainers[i].Init(reward.RewardType, sprite, amount, wheelType);
             }
+            
+            _gunWheelImage.sprite = _wheelTypeSprites[(int)wheelType];
+            _pinImage.sprite = _pinSprites[(int)wheelType];
         }
 
         private void TurnWheel()

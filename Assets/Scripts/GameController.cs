@@ -6,6 +6,9 @@ namespace CardWheel
 {
     public class GameController : MonoBehaviour
     {
+        [SerializeField] private List<WheelTypeData> _standardWheels;
+        [SerializeField] private List<WheelTypeData> _silverWheels;
+        [SerializeField] private List<WheelTypeData> _goldenWheels;
         [SerializeField] private WheelController _wheelController;
         [SerializeField] private WheelRewardData _rewardData;
         [SerializeField] private WheelRewardSelection _rewardSelection;
@@ -16,8 +19,11 @@ namespace CardWheel
 
         [SerializeField] private int _maxCollectibleAmount;
         [SerializeField] private float _collectibleSpawnDelay;
+        [SerializeField] private int _safeZoneInterval;
+        [SerializeField] private int _superZoneInterval;
         
         private Dictionary<RewardType, Sprite> _spriteMap;
+        private int _currentWheelIndex;
 
         private void Awake()
         {
@@ -31,8 +37,31 @@ namespace CardWheel
         
         private void Start()
         {
-            _wheelController.Init(_rewardSelection, _spriteMap, this);
             _gainedRewardsController.Init(_spriteMap);
+            _wheelController.Init(_spriteMap, this);
+            InitNextWheel();
+        }
+
+        private void InitNextWheel()
+        {
+            _currentWheelIndex++;
+            List<WheelTypeData> wheelTypePool;
+            if (_currentWheelIndex % _superZoneInterval == 0)
+            {
+                wheelTypePool = _goldenWheels;
+            }
+            else if (_currentWheelIndex % _safeZoneInterval == 0)
+            {
+                wheelTypePool = _silverWheels;
+            }
+            else
+            {
+                wheelTypePool = _standardWheels;
+            }
+            
+            var wheelTypeData = wheelTypePool[Random.Range(0, wheelTypePool.Count)];
+            var rewardPool = wheelTypeData.WheelRewardSelections[Random.Range(0, wheelTypeData.WheelRewardSelections.Count)];
+            _wheelController.PrepareForSpin(rewardPool, wheelTypeData.WheelType);
         }
 
         public void GiveReward(WheelReward reward)
@@ -63,6 +92,8 @@ namespace CardWheel
                     collectible.Init(sprite, targetGainedReward, increaseAmount);
                 });
             }
+            
+            InitNextWheel();
         }
 
         private void OnBombPicked()

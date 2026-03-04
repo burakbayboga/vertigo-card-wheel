@@ -571,6 +571,7 @@ RectTransform:
   - {fileID: 747648852}
   - {fileID: 329039078}
   - {fileID: 1378918585}
+  - {fileID: 814392213}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -774,6 +775,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68589ce9b1ed6414991b1ae606f035a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _standardWheels:
+  - {fileID: 11400000, guid: fe3c43b67ad3efb40b2e9b00a93fc585, type: 2}
+  - {fileID: 11400000, guid: 3430945b2146f7a44b2d125fe53819af, type: 2}
+  _silverWheels:
+  - {fileID: 11400000, guid: e0321f81f3fb11946b988f5ad68c29d1, type: 2}
+  _goldenWheels:
+  - {fileID: 11400000, guid: 304caa3dfba96cb44b4e0b135aa1ad95, type: 2}
   _wheelController: {fileID: 747648853}
   _rewardData: {fileID: 11400000, guid: c696c02916875f84e8179ee38b107c8a, type: 2}
   _rewardSelection: {fileID: 11400000, guid: 3d48d7312f532604bbdcb15e4ada79d3, type: 2}
@@ -783,6 +791,8 @@ MonoBehaviour:
   _bombPickedPanel: {fileID: 1378918584}
   _maxCollectibleAmount: 6
   _collectibleSpawnDelay: 0.17
+  _safeZoneInterval: 5
+  _superZoneInterval: 30
 --- !u!4 &495113209
 Transform:
   m_ObjectHideFlags: 0
@@ -1060,6 +1070,16 @@ MonoBehaviour:
   - {fileID: 429393090}
   - {fileID: 1148708604}
   - {fileID: 1683440478}
+  _gunWheelImage: {fileID: 1645579070}
+  _wheelTypeSprites:
+  - {fileID: 21300000, guid: e2d92120ceff915478a14134f7aa20b9, type: 3}
+  - {fileID: 21300000, guid: d55ed96bfe2a5174fb08fc30010ec3db, type: 3}
+  - {fileID: 21300000, guid: ed23f0d55fddd4946a36f8e341f3616f, type: 3}
+  _pinImage: {fileID: 52919817}
+  _pinSprites:
+  - {fileID: 21300000, guid: e7a6c8451b412354e9bb8ac6ef2c1b41, type: 3}
+  - {fileID: 21300000, guid: d88cafbb299cb22418e1e27da34c2101, type: 3}
+  - {fileID: 21300000, guid: 22bfd9ef1b1789c45a76e05f52281c60, type: 3}
 --- !u!1 &780369229
 GameObject:
   m_ObjectHideFlags: 0
@@ -1308,6 +1328,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca8fee41bb36bb64f88d1ab822a72ffc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &814392212
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 814392213}
+  m_Layer: 5
+  m_Name: NextSpinsContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &814392213
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 814392212}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 125846034}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &816820415
 GameObject:
   m_ObjectHideFlags: 0
@@ -2384,7 +2440,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ed23f0d55fddd4946a36f8e341f3616f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d55ed96bfe2a5174fb08fc30010ec3db, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
