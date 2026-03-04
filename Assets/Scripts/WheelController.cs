@@ -13,8 +13,6 @@ namespace CardWheel
         [SerializeField] private Transform _wheelTransform;
         [SerializeField] private List<WheelRewardContainer> _rewardContainers;
         
-        public static event Action OnSpinButtonClicked;
-
         private float _currentWheelAngle = 0f;
         private bool _isSpinning = false;
         private int _chainIndex = 0;
@@ -23,11 +21,6 @@ namespace CardWheel
         private GameController _gameController;
 
         private const int _rewardCount = 8;
-        
-        private void Awake()
-        {
-            OnSpinButtonClicked = null;
-        }
 
         public void Init(WheelRewardSelection rewardPool, Dictionary<RewardType, Sprite> spriteMap, GameController gameController)
         {
@@ -104,19 +97,16 @@ namespace CardWheel
             _gameController.GiveReward(_rewardsReordered[_currentRewardIndex]);
         }
         
-        public static void TriggerSpinButtonClicked()
-        {
-            OnSpinButtonClicked?.Invoke();
-        }
+
 
         private void OnEnable()
         {
-            OnSpinButtonClicked += TurnWheel;
+            SpinButton.OnSpinButtonClicked += TurnWheel;
         }
 
         private void OnDisable()
         {
-            OnSpinButtonClicked -= TurnWheel;
+            SpinButton.OnSpinButtonClicked -= TurnWheel;
         }
     }
 }

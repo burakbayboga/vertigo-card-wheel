@@ -4,9 +4,9 @@ using UnityEngine.UI;
 
 namespace CardWheel
 {
-    public class SpinButton : MonoBehaviour
+    public class GiveUpButton : MonoBehaviour
     {
-        public static event Action OnSpinButtonClicked;
+        public static event Action OnGiveUpClicked;
         
         [SerializeField] private Button _button;
 
@@ -14,7 +14,7 @@ namespace CardWheel
         {
             _button = GetComponent<Button>();
         }
-        
+
         private void Awake()
         {
             _button.onClick.AddListener(OnButtonClicked);
@@ -22,7 +22,7 @@ namespace CardWheel
 
         private void OnButtonClicked()
         {
-            OnSpinButtonClicked?.Invoke();
+            OnGiveUpClicked?.Invoke();
         }
     }
 }

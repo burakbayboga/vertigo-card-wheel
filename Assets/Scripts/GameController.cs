@@ -12,6 +12,7 @@ namespace CardWheel
         [SerializeField] private Transform _rewardCollectibleSpawnRef;
         [SerializeField] private GameObject _rewardCollectiblePrefab;
         [SerializeField] private GainedRewardsController _gainedRewardsController;
+        [SerializeField] private GameObject _bombPickedPanel;
 
         [SerializeField] private int _maxCollectibleAmount;
         [SerializeField] private float _collectibleSpawnDelay;
@@ -20,6 +21,7 @@ namespace CardWheel
 
         private void Awake()
         {
+            Application.targetFrameRate = 60;
             _spriteMap = new();
             foreach (var rewardDataItem in _rewardData.WheelRewardDataItems)
             {
@@ -35,6 +37,12 @@ namespace CardWheel
 
         public void GiveReward(WheelReward reward)
         {
+            if (reward.RewardType == RewardType.Bomb)
+            {
+                OnBombPicked();
+                return;
+            }
+            
             var targetGainedReward = _gainedRewardsController.GetTargetForRewardCollectible(reward.RewardType);
             var sprite = _spriteMap[reward.RewardType];
             var currentCollectibleAmount = Mathf.Min(_maxCollectibleAmount, reward.RewardAmount);
@@ -55,6 +63,26 @@ namespace CardWheel
                     collectible.Init(sprite, targetGainedReward, increaseAmount);
                 });
             }
+        }
+
+        private void OnBombPicked()
+        {
+            _bombPickedPanel.SetActive(true);
+        }
+        
+        private void OnGiveUpClicked()
+        {
+            _bombPickedPanel.SetActive(false);
+        }
+
+        private void OnEnable()
+        {
+            GiveUpButton.OnGiveUpClicked += OnGiveUpClicked;
+        }
+
+        private void OnDisable()
+        {
+            GiveUpButton.OnGiveUpClicked -= OnGiveUpClicked;
         }
     }
 }

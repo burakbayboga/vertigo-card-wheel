@@ -31,5 +31,25 @@ namespace CardWheel
             _gainedRewards.Add(newGainedReward);
             return newGainedReward;
         }
+        
+        private void OnGiveUpClicked()
+        {
+            foreach (var reward in _gainedRewards)
+            {
+                Destroy(reward.gameObject);
+            }
+            
+            _gainedRewards.Clear();
+        }
+
+        private void OnEnable()
+        {
+            GiveUpButton.OnGiveUpClicked += OnGiveUpClicked;
+        }
+
+        private void OnDisable()
+        {
+            GiveUpButton.OnGiveUpClicked -= OnGiveUpClicked;
+        }
     }
 }
