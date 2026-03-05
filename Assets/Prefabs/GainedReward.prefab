@@ -221,6 +221,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6513325705732737830}
   - component: {fileID: 4101571622775148685}
+  - component: {fileID: 1637654994809473555}
   m_Layer: 5
   m_Name: GainedReward
   m_TagString: Untagged
@@ -264,8 +265,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RewardType: 17
+  _collectibleHitEffect: {fileID: 7068668248607101627, guid: 584dfebfe3c6d6a498ff7f796f1a09d0, type: 3}
   _rewardImage: {fileID: 1406578347192581401}
   _totalAmountText: {fileID: 9211875224762415701}
+  _animator: {fileID: 1637654994809473555}
+--- !u!95 &1637654994809473555
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7203485365312657568}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0c324edcb97994a45964a9c9507199fd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7919605436379949362
 GameObject:
   m_ObjectHideFlags: 0

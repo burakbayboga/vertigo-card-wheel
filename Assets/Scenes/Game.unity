@@ -646,6 +646,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 125846034}
     m_Modifications:
+    - target: {fileID: 2347411517403894671, guid: f0f6497e6da9d144dabd5f283bc763fd, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2347411517563218581, guid: f0f6497e6da9d144dabd5f283bc763fd, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -15
+      objectReference: {fileID: 0}
     - target: {fileID: 2347411518964068536, guid: f0f6497e6da9d144dabd5f283bc763fd, type: 3}
       propertyPath: m_Name
       value: GainedRewardsContainer

@@ -19,7 +19,7 @@ namespace CardWheel
 
             DOVirtual.DelayedCall(0.01f, () =>
             {
-                transform.SetParent(targetGainedReward.transform);
+                transform.SetParent(targetGainedReward.GetTargetTransformForCollectible());
 
                 var rectT = GetComponent<RectTransform>();
                 var startPos = rectT.anchoredPosition;
