@@ -16,11 +16,12 @@ namespace CardWheel
         [SerializeField] private GameObject _rewardCollectiblePrefab;
         [SerializeField] private GainedRewardsController _gainedRewardsController;
         [SerializeField] private GameObject _bombPickedPanel;
+        [SerializeField] private NextSpinsController _nextSpinsController;
 
         [SerializeField] private int _maxCollectibleAmount;
         [SerializeField] private float _collectibleSpawnDelay;
-        [SerializeField] private int _safeZoneInterval;
-        [SerializeField] private int _superZoneInterval;
+        public static int SafeZoneInterval = 5;
+        public static int SuperZoneInterval = 30;
         
         private Dictionary<RewardType, Sprite> _spriteMap;
         private int _currentWheelIndex;
@@ -39,18 +40,20 @@ namespace CardWheel
         {
             _gainedRewardsController.Init(_spriteMap);
             _wheelController.Init(_spriteMap, this);
+            _nextSpinsController.Init();
             InitNextWheel();
         }
 
         private void InitNextWheel()
         {
+            _wheelController.ResetWheel();
             _currentWheelIndex++;
             List<WheelTypeData> wheelTypePool;
-            if (_currentWheelIndex % _superZoneInterval == 0)
+            if (_currentWheelIndex % SuperZoneInterval == 0)
             {
                 wheelTypePool = _goldenWheels;
             }
-            else if (_currentWheelIndex % _safeZoneInterval == 0)
+            else if (_currentWheelIndex % SafeZoneInterval == 0)
             {
                 wheelTypePool = _silverWheels;
             }
@@ -62,6 +65,7 @@ namespace CardWheel
             var wheelTypeData = wheelTypePool[Random.Range(0, wheelTypePool.Count)];
             var rewardPool = wheelTypeData.WheelRewardSelections[Random.Range(0, wheelTypeData.WheelRewardSelections.Count)];
             _wheelController.PrepareForSpin(rewardPool, wheelTypeData.WheelType);
+            _nextSpinsController.UpdateItems(_currentWheelIndex);
         }
 
         public void GiveReward(WheelReward reward)
@@ -80,20 +84,23 @@ namespace CardWheel
             
             for (var i = 0; i < currentCollectibleAmount; i++)
             {
+                var increaseAmount = baseIncreaseAmount;
+                var isLastCollectible = i == currentCollectibleAmount - 1;
+                if (isLastCollectible)
+                {
+                    increaseAmount += lastIncreaseOffset;
+                }
                 DOVirtual.DelayedCall(i * _collectibleSpawnDelay, () =>
                 {
-                    var increaseAmount = baseIncreaseAmount;
-                    if (i == reward.RewardAmount - 1)
-                    {
-                        increaseAmount += lastIncreaseOffset;
-                    }
                     var collectible = Instantiate(_rewardCollectiblePrefab, _rewardCollectibleSpawnRef)
                         .GetComponent<RewardCollectible>();
                     collectible.Init(sprite, targetGainedReward, increaseAmount);
+                    if (isLastCollectible)
+                    {
+                        InitNextWheel();
+                    }
                 });
             }
-            
-            InitNextWheel();
         }
 
         private void OnBombPicked()
@@ -104,6 +111,8 @@ namespace CardWheel
         private void OnGiveUpClicked()
         {
             _bombPickedPanel.SetActive(false);
+            _currentWheelIndex = 0;
+            InitNextWheel();
         }
 
         private void OnEnable()

@@ -100,18 +100,19 @@ namespace CardWheel
 
         private void OnWheelRotationOver()
         {
-            _isSpinning = false;
-            _chainIndex = 0;
             _currentRewardIndex %= _rewardCount;
             if (_currentRewardIndex < 0)
             {
                 _currentRewardIndex += _rewardCount;
             }
-            
             _gameController.GiveReward(_rewardsReordered[_currentRewardIndex]);
         }
-        
 
+        public void ResetWheel()
+        {
+            _isSpinning = false;
+            _chainIndex = 0;
+        }
 
         private void OnEnable()
         {
