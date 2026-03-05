@@ -43,7 +43,7 @@ namespace CardWheel
                 var reward = _rewardsReordered[i];
                 var sprite = _spriteMap[reward.RewardType];
                 var amount = reward.RewardAmount;
-                _rewardContainers[i].Init(reward.RewardType, sprite, amount, wheelType);
+                _rewardContainers[i].Init(reward.RewardType, sprite, amount);
             }
             
             _gunWheelImage.sprite = _wheelTypeSprites[(int)wheelType];
