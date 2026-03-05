@@ -17,6 +17,7 @@ namespace CardWheel
         [SerializeField] private List<Sprite> _wheelTypeSprites;
         [SerializeField] private Image _pinImage;
         [SerializeField] private List<Sprite> _pinSprites;
+        [SerializeField] private List<GameObject> _wheelTypeHeaders;
         
         private float _currentWheelAngle = 0f;
         private bool _isSpinning = false;
@@ -48,6 +49,10 @@ namespace CardWheel
             
             _gunWheelImage.sprite = _wheelTypeSprites[(int)wheelType];
             _pinImage.sprite = _pinSprites[(int)wheelType];
+            for (var i = 0; i < _wheelTypeHeaders.Count; i++)
+            {
+                _wheelTypeHeaders[i].SetActive(i == (int)wheelType);
+            }
         }
 
         private void TurnWheel()

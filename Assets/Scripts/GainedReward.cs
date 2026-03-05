@@ -8,6 +8,7 @@ namespace CardWheel
     {
         [HideInInspector] public RewardType RewardType;
 
+        [SerializeField] private Transform _collectibleHitTarget;
         [SerializeField] private GameObject _collectibleHitEffect;
         [SerializeField] private Image _rewardImage;
         [SerializeField] private TextMeshProUGUI _totalAmountText;
@@ -35,7 +36,7 @@ namespace CardWheel
 
         public Transform GetTargetTransformForCollectible()
         {
-            return _rewardImage.transform;
+            return _collectibleHitTarget;
         }
         
         public void OnCollectibleArrive(int amount)
