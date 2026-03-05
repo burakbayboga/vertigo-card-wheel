@@ -25,6 +25,8 @@ namespace CardWheel
         
         private Dictionary<RewardType, Sprite> _spriteMap;
         private int _currentWheelIndex;
+        private Dictionary<RewardType, int> _currentInventory = new();
+        private int _reviveGoldCost = 25;
 
         private void Awake()
         {
@@ -75,6 +77,11 @@ namespace CardWheel
                 OnBombPicked();
                 return;
             }
+
+            if (!_currentInventory.TryAdd(reward.RewardType, reward.RewardAmount))
+            {
+                _currentInventory[reward.RewardType] += reward.RewardAmount;
+            }
             
             var targetGainedReward = _gainedRewardsController.GetTargetForRewardCollectible(reward.RewardType);
             var sprite = _spriteMap[reward.RewardType];
@@ -115,14 +122,36 @@ namespace CardWheel
             InitNextWheel();
         }
 
+        private void OnReviveClicked()
+        {
+            if (_currentInventory.TryGetValue(RewardType.Gold, out var goldAmount))
+            {
+                if (goldAmount < _reviveGoldCost)
+                {
+                    return;
+                }
+            }
+            else
+            {
+                return;
+            }
+            
+            _bombPickedPanel.SetActive(false);
+            _currentInventory[RewardType.Gold] -= _reviveGoldCost;
+            _gainedRewardsController.SetRewardAmount(RewardType.Gold, _currentInventory[RewardType.Gold]);
+            InitNextWheel();
+        }
+
         private void OnEnable()
         {
             GiveUpButton.OnGiveUpClicked += OnGiveUpClicked;
+            ReviveButton.OnReviveClicked += OnReviveClicked;
         }
 
         private void OnDisable()
         {
             GiveUpButton.OnGiveUpClicked -= OnGiveUpClicked;
+            ReviveButton.OnReviveClicked -= OnReviveClicked;
         }
     }
 }

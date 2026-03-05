@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace CardWheel
@@ -19,10 +18,21 @@ namespace CardWheel
             _rewardImage.sprite = rewardSprite;
             RewardType = rewardType;
         }
+
+        public void SetAmount(int amount)
+        {
+            _totalAmount = amount;
+            UpdateText();
+        }
         
         public void OnCollectibleArrive(int amount)
         {
             _totalAmount += amount;
+            UpdateText();
+        }
+
+        private void UpdateText()
+        {
             _totalAmountText.text = "x " + _totalAmount;
         }
     }

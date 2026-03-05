@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace CardWheel
@@ -30,6 +31,18 @@ namespace CardWheel
             newGainedReward.Init(rewardType, _spriteMap[rewardType]);
             _gainedRewards.Add(newGainedReward);
             return newGainedReward;
+        }
+
+        public void SetRewardAmount(RewardType rewardType, int amount)
+        {
+            var reward = _gainedRewards.FirstOrDefault(r => r.RewardType == rewardType);
+            if (reward == null)
+            {
+                Debug.LogError("Reward type not found");
+                return;
+            }
+            
+            reward.SetAmount(amount);
         }
         
         private void OnGiveUpClicked()
